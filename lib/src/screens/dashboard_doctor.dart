@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dashboard_home.dart';
 import 'smart_doctor.dart';
-
 import 'patient_record.dart';
+import 'ward_schedule_screen.dart'; // ✅ Import your Ward Matching screen
+
 class DashboardDoctor extends StatefulWidget {
   const DashboardDoctor({Key? key}) : super(key: key);
 
@@ -61,6 +62,7 @@ class _DashboardDoctorState extends State<DashboardDoctor> {
                   _buildDrawerItem(Icons.dashboard, 'Dashboard'),
                   _buildDrawerItem(Icons.folder_shared, 'Patient Record'),
                   _buildDrawerItem(Icons.smart_toy, 'Smart Doctor'),
+                  _buildDrawerItem(Icons.local_hospital, 'Ward Matching'), // ✅ new option
                   _buildDrawerItem(Icons.workspaces_filled, 'Workspace'),
                   _buildDrawerItem(Icons.announcement, 'Bulletin'),
                   _buildDrawerItem(Icons.biotech, 'Lab Report Analyzer'),
@@ -157,25 +159,25 @@ class _DashboardDoctorState extends State<DashboardDoctor> {
 
               // ===== Main Body =====
               Expanded(
-  child: selectedMenu == 'Dashboard'
-      ? DashboardHome()
-      : selectedMenu == 'Patient Record'
-          ? const PatientRecord()
-          : selectedMenu == 'Smart Doctor'
-              ? const SmartDoctor()
-              : Center(
-                  child: Text(
-                    'Welcome to $selectedMenu!',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF016969),
-                    ),
-                  ),
-                ),
-),
-
-
+                child: selectedMenu == 'Dashboard'
+                    ? DashboardHome()
+                    : selectedMenu == 'Patient Record'
+                        ? const PatientRecord()
+                        : selectedMenu == 'Smart Doctor'
+                            ? const SmartDoctor()
+                            : selectedMenu == 'Ward Matching'
+                                ? const WardScheduleScreen() // ✅ opens Ward Matching screen
+                                : Center(
+                                    child: Text(
+                                      'Welcome to $selectedMenu!',
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF016969),
+                                      ),
+                                    ),
+                                  ),
+              ),
             ],
           ),
         ),
